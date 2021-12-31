@@ -12,11 +12,11 @@ python3 main.py
 
 ## Requirements
 
-You need to install the ttkboostrap library to run the program.
+You need to install the ttkboostrap library to run the program :
 ```
 pip install ttkbootstrap
 ```
-And to hear the sounds you should install the playsound library
+And to hear the sounds you should install the playsound library : 
 ```
 pip install playsound
 ```
