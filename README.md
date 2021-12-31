@@ -1,4 +1,4 @@
-# Morse Translator 
+# 📡 Morse Translator 
 
 Using the [Tkinter](https://docs.python.org/3/library/tkinter.html) library for tue UI and the [Ttkboostrap](https://pypi.org/project/ttkbootstrap/) 
 library to add a theme to it, i made this program that basically takes a complete text of characters and converts them into morse code, 
@@ -14,11 +14,11 @@ python3 main.py
 
 You need to install the ttkboostrap library to run the program.
 ```
-pip3 install ttkbootstrap
+pip install ttkbootstrap
 ```
 And to hear the sounds you should install the playsound library
 ```
-pip3 install playsound
+pip install playsound
 ```
 ## Screenshots
 <p align="center">
