@@ -9,12 +9,17 @@ from ttkbootstrap import *
 
 PATH = pathlib.Path(__file__).parent.resolve()
 PATH = str(PATH).replace("/helpers","")
+PATH = PATH.replace("\helpers","")
 WINDOW_SIZE = "500x350"
 
 # Useful Functions
 
 def config():
-    config = open(f"{PATH}/dictionaries/english_to_morse.json")
+    try:
+        config = open(f"{PATH}/dictionaries/english_to_morse.json")
+    except FileNotFoundError:
+        config = open(f"dictionaries/english_to_morse.json")
+
     english_to_morse = json.load(config)
     morse_to_english = dict([(value, key) for key, value in english_to_morse.items()])
 
@@ -39,7 +44,7 @@ def start():
     root = style.master
 
     if os.name in ["nt"]: # This is just for windows users, linux doesn't support .ico images.
-        root.iconbitmap(f"{PATH}/images/icon.ico")
+        root.iconbitmap(f"{PATH}\images\icon.ico")
     
     root.title("Morse Code - Translator")
     root.geometry(WINDOW_SIZE)

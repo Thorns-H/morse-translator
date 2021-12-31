@@ -107,7 +107,7 @@ def show_guide():
     guide.title("Morse Guide")
 
     if os.name in ["nt"]:
-        guide.iconbitmap(f"{s.PATH}/images/icon.ico")
+        guide.iconbitmap(f"{s.PATH}\images\icon.ico")
 
     guide.geometry("350x350+"+str(s.root.winfo_x() + 500) + "+" + str(s.root.winfo_y()))
 
