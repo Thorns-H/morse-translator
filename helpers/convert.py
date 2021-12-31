@@ -1,4 +1,7 @@
+import os
 from helpers import morse as s
+from playsound import playsound
+from PIL import Image, ImageTk
 
 def convert():
     if s.language.get() == 1:
@@ -67,3 +70,56 @@ def get_english():
         english += " "
 
     s.output_text.insert("1.0", english)
+
+def play():
+
+    # Finding where the morse code is
+
+    if s.language.get() == 1:
+        text = s.output_text.get("1.0", s.END)   
+    elif s.language.get() == 2:
+        text = s.input_text.get("1.0", s.END)
+    
+    # Play the tones
+
+    for value in text:
+        if value == ".":
+            playsound(f'{s.PATH}/sounds/dot.mp3')
+            s.root.after(100)
+        elif value == "-":
+            playsound(f'{s.PATH}/sounds/dash.mp3')
+            s.root.after(200)
+        elif value == " ":
+            s.root.after(300)
+        elif value == "|":
+            s.root.after(700)
+
+def hide_guide():
+    s.guide.config(state=s.NORMAL)
+    guide.destroy()
+
+def show_guide():
+    global morse, guide 
+
+    # Creating another window
+
+    guide = s.Toplevel() 
+    guide.title("Morse Guide")
+
+    if os.name in ["nt"]:
+        guide.iconbitmap(f"{s.PATH}/images/icon.ico")
+
+    guide.geometry("350x350+"+str(s.root.winfo_x() + 500) + "+" + str(s.root.winfo_y()))
+
+    morse = s.ImageTk.PhotoImage(Image.open(f'{s.PATH}/images/morse_chart.jpg'))
+    label = s.ttk.Label(guide, image = morse)
+    label.pack(padx = 5, pady = 5, ipadx = 5, ipady = 5)
+
+    # Defining a close button
+
+    close = s.ttk.Button(guide, text = "Close", command = hide_guide)
+    close.pack(padx = 10, pady = 5, ipadx = 50)
+
+    # Disable guide button pop up
+
+    s.guide.config(state=s.DISABLED)

@@ -32,7 +32,7 @@ def start():
 
     # Define window settings using ttkboostrap
 
-    global language, input_text, output_text
+    global root, language, input_text, output_text, guide
 
     style = Style()
     style.theme_use('darkly')
@@ -67,7 +67,7 @@ def start():
     english_button = ttk.Radiobutton(input_frame, text = "Morse Code --> English", variable = language, value = 2)
     english_button.grid(row = 1, column = 0)
 
-    guide = ttk.Button(input_frame, text = "Guide")
+    guide = ttk.Button(input_frame, text = "Guide", command = call.show_guide)
     guide.grid(row = 2, column = 0, sticky = "WE", padx = 10, ipadx = 56)
 
     # Creating the outputs
@@ -78,7 +78,7 @@ def start():
     convert_button = ttk.Button(output_frame, text = "Convert", command = call.convert)
     convert_button.grid(row = 0, column = 0, padx = 10, ipadx = 50)
 
-    play_button = ttk.Button(output_frame, text = "Play Morse")
+    play_button = ttk.Button(output_frame, text = "Play Morse", command = call.play)
     play_button.grid(row = 1, column = 0, padx = 10, sticky = "WE")
 
     clear_button = ttk.Button(output_frame, text = "Clear", command = clear)
