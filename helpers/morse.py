@@ -1,6 +1,7 @@
 import os
 import pathlib
 import json
+from helpers import convert as call
 from tkinter import *
 from ttkbootstrap import *
 
@@ -8,8 +9,6 @@ from ttkbootstrap import *
 
 PATH = pathlib.Path(__file__).parent.resolve()
 PATH = str(PATH).replace("/helpers","")
-FRAME_COLOR = "#dcdcdc"
-
 WINDOW_SIZE = "500x350"
 
 # Useful Functions
@@ -21,11 +20,19 @@ def config():
 
     return english_to_morse, morse_to_english
 
+english_to_morse, morse_to_english = config()
+
+def clear():
+    input_text.delete("1.0", END)
+    output_text.delete("1.0", END)
+
 # Main Function
 
 def start():
 
     # Define window settings using ttkboostrap
+
+    global language, input_text, output_text
 
     style = Style()
     style.theme_use('darkly')
@@ -37,8 +44,6 @@ def start():
     root.title("Morse Code - Translator")
     root.geometry(WINDOW_SIZE)
     root.resizable(0,0)
-
-    english_to_morse, morse_to_english = config()
 
     # Creating frames
 
@@ -70,13 +75,13 @@ def start():
     output_text = Text(output_frame,height = 8,width = 30)
     output_text.grid(row = 0, column = 1, rowspan = 4, padx = 5, pady = 5)
 
-    convert_button = ttk.Button(output_frame, text = "Convert")
+    convert_button = ttk.Button(output_frame, text = "Convert", command = call.convert)
     convert_button.grid(row = 0, column = 0, padx = 10, ipadx = 50)
 
     play_button = ttk.Button(output_frame, text = "Play Morse")
     play_button.grid(row = 1, column = 0, padx = 10, sticky = "WE")
 
-    clear_button = ttk.Button(output_frame, text = "Clear")
+    clear_button = ttk.Button(output_frame, text = "Clear", command = clear)
     clear_button.grid(row = 2, column = 0, padx = 10, sticky = "WE")
 
     quit = ttk.Button(output_frame, text = "Quit", command = root.destroy)
